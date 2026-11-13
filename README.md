@@ -2,7 +2,7 @@
 
 A small Flask web app to track crypto holdings and see their live value and gain/loss, using Coinbase's public price API.
 
-**Live demo:** _add link_
+**Live demo:** 
 
 ## Features
 - Add and remove holdings (symbol, quantity, buy price)
