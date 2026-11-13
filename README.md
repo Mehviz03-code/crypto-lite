@@ -28,4 +28,4 @@ pytest
 - `calc.py`: gain/loss, sorting, and best-performer logic (tested in `tests/`)
 
 ## What I learned
-_Write 3 to 4 sentences in your own words: a bug you hit, what you'd change, what you'd add next._
+
