@@ -1,0 +1,18 @@
+body { font-family: system-ui, sans-serif; background: #f5f7fa; color: #1b2430; margin: 0; }
+main { max-width: 900px; margin: 0 auto; padding: 32px 20px; }
+.summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+.summary div { background: #fff; border: 1px solid #dde3ea; border-radius: 8px; padding: 16px; }
+.summary span { display: block; color: #5d6b79; font-size: 0.85rem; }
+.summary b { font-size: 1.4rem; }
+.add { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+.add input { flex: 1 1 140px; padding: 8px; border: 1px solid #dde3ea; border-radius: 6px; }
+button { padding: 8px 14px; border: 0; border-radius: 6px; background: #1d4ed8; color: #fff; cursor: pointer; }
+td button { background: #e5e7eb; color: #1b2430; padding: 4px 10px; }
+table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #dde3ea; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #eef1f4; }
+td form { margin: 0; }
+.up { color: #15803d; }
+.down { color: #b42318; }
+.error { color: #b42318; }
+.empty { color: #5d6b79; text-align: center; }
+@media (max-width: 600px) { .summary { grid-template-columns: 1fr; } }

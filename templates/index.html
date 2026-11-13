@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crypto Portfolio</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main>
+    <h1>Crypto Portfolio</h1>
+
+    <section class="summary">
+      <div><span>Total value</span><b>${{ "{:,.2f}".format(total_value) }}</b></div>
+      <div><span>Total gain / loss</span>
+        <b class="{{ 'up' if total_gain >= 0 else 'down' }}">${{ "{:,.2f}".format(total_gain) }}</b></div>
+      <div><span>Best performer</span>
+        <b>{% if best %}{{ best.symbol }} ({{ "{:+.1f}".format(best.gain_pct) }}%){% else %}-{% endif %}</b></div>
+    </section>
+
+    <form action="{{ url_for('add') }}" method="post" class="add">
+      <input name="symbol" placeholder="Symbol (BTC)" required>
+      <input name="quantity" placeholder="Quantity" required>
+      <input name="buy_price" placeholder="Buy price (USD)" required>
+      <button type="submit">Add</button>
+    </form>
+    {% if error %}<p class="error">{{ error }}</p>{% endif %}
+
+    <table>
+      <thead><tr><th>Asset</th><th>Qty</th><th>Buy</th><th>Price</th><th>Value</th><th>Gain / loss</th><th></th></tr></thead>
+      <tbody>
+        {% for h in priced %}
+        <tr>
+          <td><b>{{ h.symbol }}</b></td>
+          <td>{{ h.quantity }}</td>
+          <td>${{ "{:,.2f}".format(h.buy_price) }}</td>
+          <td>${{ "{:,.2f}".format(h.price) }}</td>
+          <td>${{ "{:,.2f}".format(h.value) }}</td>
+          <td class="{{ 'up' if h.gain >= 0 else 'down' }}">${{ "{:,.2f}".format(h.gain) }} ({{ "{:+.1f}".format(h.gain_pct) }}%)</td>
+          <td><form action="{{ url_for('delete', holding_id=h.id) }}" method="post"><button type="submit">Remove</button></form></td>
+        </tr>
+        {% endfor %}
+        {% for h in unpriced %}
+        <tr>
+          <td><b>{{ h.symbol }}</b></td><td>{{ h.quantity }}</td><td>${{ "{:,.2f}".format(h.buy_price) }}</td>
+          <td colspan="3" class="down">Price unavailable (check the symbol or try again)</td>
+          <td><form action="{{ url_for('delete', holding_id=h.id) }}" method="post"><button type="submit">Remove</button></form></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% if not priced and not unpriced %}<p class="empty">No holdings yet. Add one above.</p>{% endif %}
+  </main>
+</body>
+</html>
